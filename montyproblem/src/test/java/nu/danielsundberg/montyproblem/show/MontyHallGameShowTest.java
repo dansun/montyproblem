@@ -1,5 +1,6 @@
 package nu.danielsundberg.montyproblem.show;
 
+import nu.danielsundberg.montyproblem.show.box.Box;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

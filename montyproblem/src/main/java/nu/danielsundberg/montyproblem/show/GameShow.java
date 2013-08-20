@@ -1,5 +1,9 @@
 package nu.danielsundberg.montyproblem.show;
 
+import nu.danielsundberg.montyproblem.show.box.Box;
+
+import java.util.Set;
+
 /**
  * Interface till vår gameshow
  */
@@ -32,5 +36,17 @@ public interface GameShow {
      */
     void removeRandomBoxesExcept(int numberOfBoxesToRemove, Box...boxesNotToRemove)
             throws IllegalArgumentException;
+
+    /**
+     * Hämta alla unika lådor i gameshowen
+     * @return alla lådor i showen
+     */
+    Set<Box> getBoxes();
+
+    /**
+     * Addera box till gameshowen
+     * @param boxToAdd låda att lägga till
+     */
+    void addBox(Box boxToAdd);
 
 }

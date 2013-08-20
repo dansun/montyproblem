@@ -1,4 +1,4 @@
-package nu.danielsundberg.montyproblem.show;
+package nu.danielsundberg.montyproblem.show.box;
 
 /**
  * Abstrakt klass som representerar alla lådor

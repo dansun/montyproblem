@@ -1,4 +1,4 @@
-package nu.danielsundberg.montyproblem.show;
+package nu.danielsundberg.montyproblem.show.box;
 
 /**
  * Representerar en låda som kan ha eller vara utan pengar
