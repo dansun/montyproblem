@@ -6,9 +6,7 @@
     <groupId>nu.danielsundberg.montyproblem</groupId>
 	<artifactId>montyproblem-reactor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-    <name>montyproblem-reactor</name>
-	<description>MontyProblem :: Reactor</description>
+    <name>MontyProblem :: Reactor</name>
 	<packaging>pom</packaging>
 
 	<modules>
