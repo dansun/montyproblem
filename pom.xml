@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>montyhall</module>
+		<module>montyproblem</module>
 	</modules>
 
 	<properties>
