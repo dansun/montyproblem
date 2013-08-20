@@ -1,24 +1,31 @@
 package nu.danielsundberg.montyproblem.show;
 
+import nu.danielsundberg.montyproblem.show.box.AbstractBoxImpl;
 import nu.danielsundberg.montyproblem.show.box.Box;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MontyHallGameShowTest {
 
     private MontyHallGameShow montyHallGameShow;
 
+    @Mock Box vinnandeBox, forlorandeBox;
+
     private static final int ANNAT_ANTAL = 10;
 
     @Before
     public void setup() throws Exception {
         montyHallGameShow = new MontyHallGameShow();
+        when(vinnandeBox.hasPrize()).thenReturn(AbstractBoxImpl.PRIZE);
+        when(forlorandeBox.hasPrize()).thenReturn(AbstractBoxImpl.NO_PRIZE);
     }
 
     @Test
@@ -58,6 +65,13 @@ public class MontyHallGameShowTest {
             assertThat(montyHallGameShow.selectRandomBoxExcept(aBox).equals(aBox),
                     is(Boolean.FALSE));
         }
+    }
+
+    @Test
+    public void verifieraAttGameshowReturnerarIckeVinnandeBox() throws Exception {
+        montyHallGameShow = new MontyHallGameShow(1);
+        montyHallGameShow.addBox(forlorandeBox);
+        assertThat(forlorandeBox, is(montyHallGameShow.selectRandomBoxWithoutPrize()));
     }
 
 }
