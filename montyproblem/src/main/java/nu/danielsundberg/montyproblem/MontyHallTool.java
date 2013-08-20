@@ -7,6 +7,7 @@ import nu.danielsundberg.montyproblem.show.MontyHallGameShow;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.logging.Logger;
 
 /**
  * Tool för att undersöka MonyHall-fenomenet, kan användas som tool eller köras från jar.
@@ -14,13 +15,19 @@ import java.math.RoundingMode;
 public final class MontyHallTool {
 
     /**
-     * Defaultvärden för vår show
+     * EPISK Ascii-art för logo
      */
-    public static final BigInteger DEFAULT_NUMBER_OF_TRIES = BigInteger.valueOf(50000);
-    public static final BigInteger DEFAULT_NUMBER_OF_BOXES = BigInteger.valueOf(3);
-    public static final BigInteger DEFAULT_NUMBER_TO_REMOVE = BigInteger.ONE;
-    public static final BigInteger PROCENT = BigInteger.valueOf(100);
+    public static final String EPIC_LOGO =
+            "nu.danielsundberg     .-.                        .-.   .-.                 \n"+
+            "---------------------.' `.-----------------------: :---: :-----------------\n"+
+            ",-.,-.,-. .--. ,-.,-.`. .'.-..-..---. .--.  .--. : `-. : :   .--. ,-.,-.,-.\n"+
+            ": ,. ,. :' .; :: ,. : : : : :; :: .; `: ..'' .; :' .; :: :_ ' '_.': ,. ,. :\n"+
+            ":_;:_;:_;`.__.':_;:_; :_; `._. ;: ._.':_;  `.__.'`.__.'`.__;`.__.':_;:_;:_;\n"+
+            "---------------------------.-. :: :-------------------------0.0.1-SNAPSHOT-\n"+
+            "                           `._.':_;                                        ";
 
+    private static final Logger LOGGER = Logger.getLogger(MontyHallTool.class.getName());
+    
     /**
      * Konstanta felmeddelanden
      */
@@ -28,6 +35,20 @@ public final class MontyHallTool {
             "Number of tries must be larger than 0";
     public static final String ANTAL_BORTTAGNINGAR_MASTE_VARA_FARRE_AN_ANTAL_LADOR_MINUS_ETT =
             "Number to remove must be less than number of boxes - 1";
+    public static final String ANVANDNING_OCH_PARAMETRAR =
+            "Usage: [numberOfSimulations] [numberOfBoxes] [numberOfBoxesToRemove]";
+    public static final String KOMMER_ANVANDA_DEFAULT_VARDEN =
+            "Will use default values for this run.";
+
+
+    /**
+     * Defaultvärden för vår show
+     */
+    public static final BigInteger EXACT_NUMBER_OR_ARGUMENTS = BigInteger.valueOf(3);
+    public static final BigInteger DEFAULT_NUMBER_OF_TRIES = BigInteger.valueOf(50000);
+    public static final BigInteger DEFAULT_NUMBER_OF_BOXES = BigInteger.valueOf(3);
+    public static final BigInteger DEFAULT_NUMBER_TO_REMOVE = BigInteger.ONE;
+    public static final BigInteger PROCENT = BigInteger.valueOf(100);
 
     /**
      * Göm undan defaultkonstruktorn för statisk klass
@@ -52,30 +73,30 @@ public final class MontyHallTool {
         //
         // Skriv ut EPISK ASCII-logo och initial info.
         //
-        System.out.println(
-                "nu.danielsundberg     .-.                        .-.   .-.                 \n"+
-                "---------------------.' `.-----------------------: :---: :-----------------\n"+
-                ",-.,-.,-. .--. ,-.,-.`. .'.-..-..---. .--.  .--. : `-. : :   .--. ,-.,-.,-.\n"+
-                ": ,. ,. :' .; :: ,. : : : : :; :: .; `: ..'' .; :' .; :: :_ ' '_.': ,. ,. :\n"+
-                ":_;:_;:_;`.__.':_;:_; :_; `._. ;: ._.':_;  `.__.'`.__.'`.__;`.__.':_;:_;:_;\n"+
-                "---------------------------.-. :: :-------------------------0.0.1-SNAPSHOT-\n"+
-                "                           `._.':_;                                        ");
+        LOGGER.info(EPIC_LOGO);
         //
         // Initiera simulering
         //
         GameShowParameters gameShowParameters;
-        if(arguments != null && arguments.length == 3) {
+        if(arguments != null &&
+                arguments.length == EXACT_NUMBER_OR_ARGUMENTS.intValue()) {
+            //
+            // Korrekt angivna parametermängder parsas vidare
+            //
             gameShowParameters = new GameShowParameters(arguments);
         } else {
-            System.out.println("Usage: [numberOfSimulations] [numberOfBoxes] [numberOfBoxesToRemove]");
-            System.out.println("Will use default values for this run.");
+            //
+            // Felaktiga parametrar belönas med defaultvärden.
+            //
+            LOGGER.info(ANVANDNING_OCH_PARAMETRAR);
+            LOGGER.info(KOMMER_ANVANDA_DEFAULT_VARDEN);
             gameShowParameters =
                     new GameShowParameters(
                         DEFAULT_NUMBER_OF_TRIES,
                         DEFAULT_NUMBER_OF_BOXES,
                         DEFAULT_NUMBER_TO_REMOVE);
         }
-        System.out.println(
+        LOGGER.info(
                 "Running " + gameShowParameters.getNumberOfTries() +
                 " simulations with " + gameShowParameters.getNumberOfBoxes() +
                 " initial boxes and removing " + gameShowParameters.getNumberOfBoxesToRemove() +
@@ -167,19 +188,21 @@ public final class MontyHallTool {
                 BigDecimal.valueOf(winWithChange.floatValue()/numberOfTries.intValue() * PROCENT.intValue());
         BigDecimal withoutChangeAsPercent =
                 BigDecimal.valueOf(winWithoutChange.floatValue()/ numberOfTries.intValue() * PROCENT.intValue());
-        System.out.println(
+        LOGGER.info(
                 "Wins by switching box: " + winWithChange.stripTrailingZeros() +
                 " wins out of " + numberOfTries +
                 " (" + withChangeAsPercent.setScale(1, RoundingMode.HALF_UP) + "%)");
-        System.out.println(
+        LOGGER.info(
                 "Wins by staying true: " + winWithoutChange.stripTrailingZeros() +
                 " wins out of " + numberOfTries +
                 " (" + withoutChangeAsPercent.setScale(1, RoundingMode.HALF_UP) + "%)");
-        System.out.println("The simultation seems to recommend " +
+        LOGGER.info(
+                "The simultation seems to recommend " +
                 (withChangeAsPercent.compareTo(withoutChangeAsPercent) > 0 ?
                         "that you change your selection." :
                         "that you keep your original choice."));
-        System.out.println("--------------------------------------------------------------------------");
+        LOGGER.info(
+                "--------------------------------------------------------------------------");
     }
 
     /**

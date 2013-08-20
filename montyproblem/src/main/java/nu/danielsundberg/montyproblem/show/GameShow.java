@@ -34,8 +34,7 @@ public interface GameShow {
      * @param boxesNotToRemove array med låddor att inte ta bort
      * @throws IllegalArgumentException
      */
-    void removeRandomBoxesExcept(int numberOfBoxesToRemove, Box...boxesNotToRemove)
-            throws IllegalArgumentException;
+    void removeRandomBoxesExcept(int numberOfBoxesToRemove, Box...boxesNotToRemove);
 
     /**
      * Hämta alla unika lådor i gameshowen

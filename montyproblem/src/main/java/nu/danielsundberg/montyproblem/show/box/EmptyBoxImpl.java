@@ -1,7 +1,7 @@
 package nu.danielsundberg.montyproblem.show.box;
 
 /**
- * Representerar en låda som inte innehåller pengar.
+ * Representerar en låda som inte innehåller vinsten.
  */
 public class EmptyBoxImpl extends AbstractBoxImpl {
 

@@ -5,9 +5,15 @@ package nu.danielsundberg.montyproblem.show.box;
  */
 public abstract class AbstractBoxImpl implements Box {
 
+    /**
+     * Värden för lådor, om den är vinnande eller ej.
+     */
     public static final Boolean PRIZE = Boolean.TRUE;
     public static final Boolean NO_PRIZE = Boolean.FALSE;
 
+    /**
+     * Lådans innehåll.
+     */
     private boolean containsPrize;
 
     /**

@@ -90,7 +90,7 @@ public abstract class AbstractGameShowImpl implements GameShow {
      * @param boxesNotToRemove låddor att inte ta bort
      * @throws IllegalArgumentException
      */
-    public final void removeRandomBoxesExcept(int numberOfBoxesToRemove, Box...boxesNotToRemove) throws IllegalArgumentException {
+    public final void removeRandomBoxesExcept(int numberOfBoxesToRemove, Box...boxesNotToRemove) {
         //
         // Validera att vi inte försöker ta bort för många lådor
         //
