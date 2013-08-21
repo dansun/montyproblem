@@ -28,7 +28,7 @@ public abstract class AbstractGameShowImpl implements GameShow {
      * Lådor som showen innehåller.
      * Default ett tomt set med lådor.
      */
-    private Set<Box> boxes = new HashSet();
+    private Set<Box> boxes = new HashSet<Box>();
 
     /**
      * Skapa en ny låda
@@ -100,7 +100,7 @@ public abstract class AbstractGameShowImpl implements GameShow {
             //
             // Skapa ett set med lådor vi vill ta bort
             //
-            Set<Box> boxesToRemove = new HashSet();
+            Set<Box> boxesToRemove = new HashSet<Box>();
             for(int i = numberOfBoxesToRemove; i > 0; i--) {
                 //
                 // Välj en slumpvist utvald låda i showen (som inte är angivna lådor)
