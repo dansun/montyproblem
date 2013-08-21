@@ -199,6 +199,12 @@
 
 	</distributionManagement>
 
+    <scm>
+        <connection>scm:git:git@github.com:dansun/montyproblem.git</connection>
+        <url>scm:git:git@github.com:dansun/montyproblem.git</url>
+        <developerConnection>scm:git:git@github.com:dansun/montyproblem.git</developerConnection>
+    </scm>
+
 	<build>
 		<plugins>
 
